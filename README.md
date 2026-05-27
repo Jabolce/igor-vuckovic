@@ -31,22 +31,6 @@ The theme prioritizes visual grandeur, premium minimal typography, responsive pe
 - Supports high-quality Vimeo/YouTube embeds that scale correctly across desktop and mobile screens.
 - Displays the sorted, dynamic credits list below the video block with modern typography.
 
-### 5. Custom Contact Template
-- Dedicated contact page template (`templates/template-contact.php`).
-- Manage contact details directly from the page editor:
-  - Name, Role/Title, Email, Phone, Instagram.
-  - Profile Photo uploader using the native WordPress Media Library.
-  - Optional Agency information (Agency Name, Agency Email, Agency Phone).
-
-### 6. Responsive Breakpoints Cheat Sheet
-The layout adjusts gracefully to all screen dimensions:
-- **`1920px+` (Large Monitor)**: Large grid layouts capped with proper padding for wider screens.
-- **`1440px` / `1366px` / `1280px` (Laptops)**: Custom container margins, proportional typography scaling, and fluid grid sizing.
-- **`1024px` (Small Laptop)**: Margins tighten, credits adapt.
-- **`978px` (Tablet - Landscape)**: **Hamburger menu activates** to replace desktop navigation; portfolio grid changes to 2 columns, and contact layouts stack.
-- **`768px` (Tablet - Portrait)**: Lightbox and header adapt, and single project metadata stacks.
-- **`500px - 0px` (Mobile)**: Single column portfolio layouts, optimized paddings, and smaller font headings for maximum readability.
-
 ---
 
 ## 📂 Directory & File Structure
