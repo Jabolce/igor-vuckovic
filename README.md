@@ -30,7 +30,6 @@ The theme prioritizes visual grandeur, premium minimal typography, responsive pe
 ### 4. Custom Single Project Template
 - Supports high-quality Vimeo/YouTube embeds that scale correctly across desktop and mobile screens.
 - Displays the sorted, dynamic credits list below the video block with modern typography.
-- Built-in scroll snap alignments.
 
 ### 5. Custom Contact Template
 - Dedicated contact page template (`templates/template-contact.php`).
