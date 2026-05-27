@@ -1,0 +1,1046 @@
+/*
+Theme Name: Igor Vuckovic
+Theme URI: https://igorvuckovic.com
+Author: Igor Vuckovic
+Author URI: https://igorvuckovic.com
+Description: A minimal, cinematic portfolio theme for Igor Vuckovic - Cinematographer & Director of Photography
+Version: 2.2.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: igor-vuckovic
+*/
+
+/* =========================================================
+   RESET & BASE
+   ========================================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --color-bg:      #f0f0f0;
+    --color-fg:      #111111;
+    --color-mid:     #888888;
+    --color-link:    #111111;
+    --font-heading:  'Barlow Condensed', sans-serif;
+    --font-body:     'Inter', sans-serif;
+    --transition:    0.3s ease;
+    --grid-gap:      4px;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--color-link);
+    text-decoration: none;
+    transition: opacity var(--transition);
+}
+
+a:hover { opacity: 0.6; }
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+ul, ol { list-style: none; }
+
+/* =========================================================
+   SITE WRAPPER
+   ========================================================= */
+.site-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.site-main {
+    flex: 1;
+    padding-bottom: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.site-header {
+    text-align: center;
+    padding: 50px 30px 30px;
+}
+
+.site-branding { margin-bottom: 24px; }
+
+.site-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--color-fg);
+}
+
+.site-title a { color: inherit; }
+.site-title a:hover { opacity: 1; }
+
+.site-tagline {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-fg);
+    margin-top: 8px;
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+.site-nav { margin-top: 10px; }
+
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+}
+
+.nav-menu li a {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-fg);
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition), opacity var(--transition);
+}
+
+.nav-menu li a:hover,
+.nav-menu li.current-menu-item a,
+.nav-menu li.current_page_item a,
+.nav-menu li.active a {
+    opacity: 1;
+    border-bottom-color: var(--color-fg);
+}
+
+/* =========================================================
+   HAMBURGER MENU (tablet & mobile)
+   ========================================================= */
+.hamburger-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-top: 12px;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.hamburger-btn span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--color-fg);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+}
+
+/* Animated X when open */
+.hamburger-btn.is-open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+.hamburger-btn.is-open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.hamburger-btn.is-open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Mobile nav overlay */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(240, 240, 240, 0.97);
+    z-index: 8888;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+.mobile-nav.is-open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.mobile-nav li a {
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-fg);
+    transition: opacity var(--transition);
+}
+
+.mobile-nav li a:hover { opacity: 0.5; }
+
+@media (max-width: 768px) {
+    .nav-menu { display: none; }  /* hide desktop nav */
+    .hamburger-btn { display: flex; }  /* show hamburger */
+    .mobile-nav { display: flex; }  /* mobile nav is flex, visibility controlled by opacity/pointer-events */
+}
+
+/* =========================================================
+   VIDEO HERO
+   ========================================================= */
+.hero {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 0px); /* full viewport */
+    overflow: hidden;
+    background: #000;
+}
+
+/* Iframe wrapper — covers the full hero */
+.hero-video-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-video-wrap iframe {
+    position: absolute;
+    /* oversized so it fills any aspect ratio */
+    top: 50%; left: 50%;
+    width: 177.78vh; /* 16/9 × 100vh */
+    height: 100vh;
+    min-width: 100%;
+    min-height: 56.25vw; /* 9/16 × 100vw */
+    transform: translate(-50%, -50%);
+    border: none;
+    pointer-events: none;
+}
+
+/* Dark overlay for readability */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+/* Centered text on top of video */
+.hero-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 24px;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 16px;
+}
+
+.hero-tagline {
+    font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 48px;
+}
+
+/* Scroll-down arrow */
+.hero-scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    animation: bounce 2s ease infinite;
+}
+
+.hero-scroll span {
+    font-size: 0.52rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.hero-scroll svg {
+    width: 18px;
+    height: 18px;
+    stroke: rgba(255, 255, 255, 0.6);
+    fill: none;
+    stroke-width: 1.5;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(6px); }
+}
+
+/* =========================================================
+   PORTFOLIO GRID
+   ========================================================= */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--grid-gap);
+    padding: 30px 30px 0;
+}
+
+.portfolio-item-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.portfolio-item-link:hover { opacity: 1; }
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background-color: #1a1a1a;
+    cursor: pointer;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                filter 0.4s ease;
+    filter: brightness(0.95);
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.04);
+    filter: brightness(0.7);
+}
+
+.portfolio-item-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+
+.portfolio-item:hover .portfolio-item-overlay { opacity: 1; }
+
+.portfolio-item-title {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+.portfolio-item-client {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 3px;
+}
+
+/* =========================================================
+   SINGLE PROJECT
+   ========================================================= */
+.project-hero {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    background-color: #111;
+    overflow: hidden;
+    max-width: 1440px;
+}
+
+.project-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-hero iframe,
+.project-hero .video-embed {
+    /* Oversized + centered so Vimeo's gray chrome (top padding
+       and end-screen panel) gets clipped by the parent's overflow:hidden */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 110%;
+    height: 115%;
+    transform: translate(-50%, -50%);
+    border: none;
+}
+
+
+.project-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 30px;
+}
+
+.project-eyebrow {
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-mid);
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px 40px;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ddd;
+}
+
+.project-meta-item {
+    text-align: center;
+}
+
+.project-meta-item label {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-mid);
+    margin-bottom: 4px;
+}
+
+.project-meta-item span {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-fg);
+}
+
+.project-title-large {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.project-description {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: #444;
+    max-width: 600px;
+}
+
+.project-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--grid-gap);
+    margin-top: 40px;
+}
+
+.project-gallery img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.project-back-link {
+    text-align: center;
+    padding: 20px 0 60px;
+}
+
+.project-back-link a {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #111;
+    padding-bottom: 2px;
+}
+
+/* =========================================================
+   CONTACT PAGE
+   ========================================================= */
+.contact-page {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1000px;
+    margin: 8vh auto 10vh auto;
+    padding: 0 40px;
+    align-items: flex-start;
+}
+
+/* LEFT: photo + info side by side on desktop */
+.contact-left {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.contact-photo {
+    flex-shrink: 0;
+    width: 320px;
+}
+
+.contact-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(100%);
+}
+
+/* Personal info block */
+.contact-info {
+    padding-top: 0;
+}
+
+.contact-info .contact-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    color: var(--color-fg);
+}
+
+.contact-info .contact-role {
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-fg);
+    margin-bottom: 18px;
+}
+
+.contact-info .contact-detail {
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    color: var(--color-fg);
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.contact-info .contact-label {
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: var(--color-fg);
+    flex-shrink: 0;
+}
+
+.contact-info .contact-detail a {
+    color: var(--color-fg);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s;
+}
+.contact-info .contact-detail a:hover { opacity: 0.6; }
+
+/* RIGHT: Agency block */
+.contact-right {
+    padding-top: 0;
+    text-align: center;
+}
+
+.contact-agency-name {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--color-fg);
+    margin-bottom: 24px;
+    line-height: 1;
+}
+
+.contact-agency-heading {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-fg);
+    margin-bottom: 14px;
+}
+
+.contact-agency-rep {
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    color: var(--color-fg);
+    margin-bottom: 24px;
+}
+
+.contact-agency-email,
+.contact-agency-website {
+    display: block;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: var(--color-fg);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-bottom: 4px;
+    transition: opacity 0.2s;
+}
+.contact-agency-email:hover,
+.contact-agency-website:hover { opacity: 0.6; }
+
+.contact-agency-phone {
+    display: block;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: var(--color-fg);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-top: 4px;
+    transition: opacity 0.2s;
+}
+.contact-agency-phone:hover { opacity: 0.6; }
+
+/* =========================================================
+   CINEMA BLACKOUT
+   Adds 'cinema-mode' to body when scrolled into the video.
+   Dims the header/footer only. Credits are controlled by JS.
+   The video is never touched so it stays fully bright.
+   ========================================================= */
+
+/* Smooth transitions on surrounding elements */
+.site-header,
+.site-footer,
+.site-wrapper,
+.site-main {
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Darken ALL wrappers so no gray bleeds through on any side */
+body.cinema-mode,
+body.cinema-mode .site-wrapper,
+body.cinema-mode .site-main {
+    background-color: #000;
+}
+
+/* Dim only the header and footer — credits remain fully visible via JS */
+body.cinema-mode .site-header,
+body.cinema-mode .site-footer {
+    opacity: 0.04;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+    text-align: center;
+    padding: 20px 30px;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-mid);
+    border-top: 1px solid #ddd;
+    margin-top: 60px;
+}
+
+/* =========================================================
+   VIDEO LIGHTBOX
+   ========================================================= */
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+.lightbox-overlay.is-open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox-inner {
+    position: relative;
+    width: 90vw;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-ratio {
+    position: relative;
+    height: 85vh;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    overflow: hidden;
+}
+
+.lightbox-ratio iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -44px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--font-body);
+    opacity: 0.7;
+    transition: opacity var(--transition);
+}
+
+.lightbox-close:hover { opacity: 1; }
+
+/* =========================================================
+   PAGE TRANSITIONS
+   ========================================================= */
+.page-transition {
+    animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================================
+   NO PROJECTS STATE
+   ========================================================= */
+.no-projects {
+    text-align: center;
+    padding: 100px 30px;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-mid);
+}
+
+/* =========================================================
+   RESPONSIVE
+   Breakpoints:
+     1920px+ — large monitor
+     1440px  — laptop
+     1366px  — laptop
+     1280px  — laptop
+     1024px  — small laptop
+      978px  — tablet landscape
+      768px  — tablet portrait
+      500px  — mobile
+   ========================================================= */
+
+/* ── 1920px+ Large monitor
+   Everything is already designed for this — just cap max-widths */
+@media (min-width: 1920px) {
+    .portfolio-grid  { max-width: 1800px; margin: 0 auto; }
+    .contact-page    { max-width: 1200px; }
+    .project-content { max-width: 1000px; }
+}
+
+/* ── 1440px Laptop */
+@media (max-width: 1440px) {
+    .contact-page    { max-width: 1080px; }
+    .portfolio-grid  { padding: 30px 30px 0; }
+}
+
+/* ── 1366px Laptop */
+@media (max-width: 1366px) {
+    .contact-page    { max-width: 1020px; padding: 0 40px; }
+}
+
+/* ── 1280px Laptop */
+@media (max-width: 1280px) {
+    .contact-page    { max-width: 960px; padding: 0 36px; }
+    .contact-photo   { width: 260px; }
+}
+
+/* ── 1024px Small laptop */
+@media (max-width: 1024px) {
+    .portfolio-grid  { padding: 20px 20px 0; }
+
+    .contact-page    { gap: 40px; padding: 0 30px; }
+    .contact-photo   { width: 200px; }
+
+    .project-content { padding: 50px 30px; }
+}
+
+/* ── 978px Tablet landscape */
+@media (max-width: 978px) {
+    /* Nav — hide desktop, show hamburger */
+    .nav-menu        { display: none; }
+    .hamburger-btn   { display: flex; }
+    .mobile-nav      { display: flex; }
+
+    /* Portfolio: 2 columns */
+    .portfolio-grid  { grid-template-columns: repeat(2, 1fr); padding: 16px 16px 0; }
+
+    /* Contact */
+    .contact-page    { gap: 32px; padding: 0 24px; margin: 6vh auto; }
+    .contact-photo   { width: 180px; }
+    .contact-left    { flex-direction: column; gap: 20px; }
+    .contact-photo   { max-width: 260px; }
+    .contact-agency-name { font-size: 2.8rem; }
+
+    /* Project */
+    .project-content { padding: 40px 24px; }
+    .project-hero    { aspect-ratio: 16 / 9; }
+
+    /* Lightbox */
+    .lightbox-ratio  { height: 70vw; aspect-ratio: 16 / 9; }
+}
+
+/* ── 768px Tablet portrait */
+@media (max-width: 768px) {
+    /* Header */
+    .site-header     { padding: 24px 20px 18px; }
+
+    /* Contact: collapse fully */
+    .contact-page    {
+        flex-direction: column;
+        gap: 36px;
+        padding: 0 20px;
+        margin: 5vh auto;
+    }
+    .contact-left    { flex-direction: row; gap: 20px; align-items: flex-start; }
+    .contact-photo   { width: 140px; flex-shrink: 0; }
+    .contact-right   { text-align: left; }
+    .contact-agency-name { font-size: 2.2rem; }
+
+    /* Project */
+    .project-meta    { flex-direction: column; gap: 14px; }
+    .project-gallery { grid-template-columns: 1fr; }
+    .project-title-large { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+
+    /* Lightbox */
+    .lightbox-ratio  { height: 56.25vw; aspect-ratio: 16 / 9; }
+    .lightbox-inner  { width: 96vw; }
+
+    /* Hero */
+    .hero-title      { letter-spacing: 0.1em; }
+    .hero-tagline    { letter-spacing: 0.28em; }
+}
+
+/* ── 500px Mobile */
+@media (max-width: 500px) {
+    /* Header */
+    .site-header     { padding: 20px 16px 14px; }
+    .site-title      { font-size: clamp(1.5rem, 8vw, 2.4rem); }
+    .site-tagline    { font-size: 0.6rem; letter-spacing: 0.2em; }
+
+    /* Portfolio: single column */
+    .portfolio-grid  { grid-template-columns: 1fr; padding: 12px 12px 0; }
+
+    /* Contact */
+    .contact-page    { padding: 0 16px; margin: 4vh auto; gap: 28px; }
+    .contact-left    { flex-direction: column; }
+    .contact-photo   { width: 100%; max-width: 240px; }
+    .contact-agency-name { font-size: 1.6rem; }
+    .contact-agency-heading { font-size: 0.7rem; }
+
+    /* Project */
+    .project-content { padding: 32px 16px; }
+    .project-hero    { aspect-ratio: 16 / 9; }
+    .project-back-link { padding: 16px 0 40px; }
+
+    /* Splash */
+    .splash-title    { font-size: 1.5rem; letter-spacing: 0.12em; }
+    .splash-subtitle { letter-spacing: 0.2em; }
+    .splash-nav      { gap: 14px; flex-direction: column; }
+
+    /* Lightbox */
+    .lightbox-ratio  { height: 56.25vw; }
+    .lightbox-close  { font-size: 0.6rem; top: -36px; }
+}
+
+
+/* =========================================================
+   CINEMATIC SPLASH SCREEN
+   ========================================================= */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    z-index: 9999;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.splash-video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Screen is wider than 16:9 (horizontal crop) */
+@media (min-aspect-ratio: 16/9) {
+    .splash-video-bg {
+        width: 100vw;
+        height: 56.25vw;
+    }
+}
+
+/* Screen is taller than 16:9 (vertical crop) */
+@media (max-aspect-ratio: 16/9) {
+    .splash-video-bg {
+        width: 177.78vh;
+        height: 100vh;
+    }
+}
+
+.splash-video-bg iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Aggressively oversized (135%) to ensure baked-in video black bars 
+       and Vimeo chrome are completely cropped out of the viewport */
+    width: 135%;
+    height: 135%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.splash-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.splash-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+}
+
+.splash-title {
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-family: var(--font-heading);
+}
+
+.splash-subtitle {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 40px;
+}
+
+.splash-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.splash-nav a {
+    color: #fff;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: relative;
+    transition: all var(--transition);
+}
+
+.splash-nav a:hover {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+    .splash-title {
+        font-size: 2rem;
+    }
+    .splash-nav {
+        gap: 20px;
+        flex-direction: column;
+    }
+}
